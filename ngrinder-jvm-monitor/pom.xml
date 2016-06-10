@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.ngrinder</groupId>
+    <artifactId>ngrinder-jvm-monitor-plugin</artifactId>
+    <version>3.4</version>
+    <name>ngrinder-jvm-monitor-plugin</name>
+    <description>ngrinder-jvm-monitor-plugin Plugin Framework for Java</description>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <ngrinder.core.version>3.4</ngrinder.core.version>
+        <plugin.id>ngrinder-jvm-monitor-plugin</plugin.id>
+        <plugin.class>org.ngrinder.network.JVMMonitor</plugin.class>
+        <plugin.version>4.0.0</plugin.version>
+        <plugin.provider>NAVER</plugin.provider>
+        <plugin.dependencies />
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <plugin-Id>${plugin.id}</plugin-Id>
+                            <plugin-Class>${plugin.class}</plugin-Class>
+                            <plugin-Version>${plugin.version}</plugin-Version>
+                            <plugin-Provider>${plugin.provider}</plugin-Provider>
+                            <plugin-Dependencies>${plugin.dependencies}</plugin-Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>maven-repo</id>
+            <name>Official Repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>ngrinder.maven.repo</id>
+            <url>https://github.com/naver/ngrinder/raw/ngrinder.maven.repo/releases</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.ngrinder</groupId>
+            <artifactId>ngrinder-core</artifactId>
+            <version>${ngrinder.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.grinder</groupId>
+            <artifactId>grinder</artifactId>
+            <version>3.9.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ro.fortsoft.pf4j</groupId>
+            <artifactId>pf4j</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.1.1.RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>
