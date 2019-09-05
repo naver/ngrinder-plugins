@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ngrinder</groupId>
 	<artifactId>siteminder-sso</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>siteminder-sso</name>
 	<description>ngrinder-siteminder-sso Plugin Framework for Java</description>
 	
@@ -18,10 +18,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
-		<ngrinder.core.version>3.4</ngrinder.core.version>
+		<ngrinder.core.version>3.5.0</ngrinder.core.version>
 		<plugin.id>siteminder-sso</plugin.id>
 		<plugin.class>org.ngrinder.sso.SiteminderSSOPlugin</plugin.class>
-		<plugin.version>4.0.0</plugin.version>
+		<plugin.version>0.0.4</plugin.version>
 		<plugin.provider>NAVER</plugin.provider>
 		<plugin.dependencies />
 	</properties>
@@ -129,9 +129,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>ro.fortsoft.pf4j</groupId>
+			<groupId>org.pf4j</groupId>
 			<artifactId>pf4j</artifactId>
-			<version>0.12.0</version>
+			<version>3.0.1</version>
 		</dependency>
 	</dependencies>
 

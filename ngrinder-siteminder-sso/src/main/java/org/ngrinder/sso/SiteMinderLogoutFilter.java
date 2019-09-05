@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ngrinder.extension.OnServletFilter;
 import org.ngrinder.service.IConfig;
+import org.pf4j.Extension;
+import org.pf4j.Plugin;
+import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ro.fortsoft.pf4j.Extension;
-import ro.fortsoft.pf4j.Plugin;
-import ro.fortsoft.pf4j.PluginWrapper;
 
 public class SiteMinderLogoutFilter extends Plugin {
 
@@ -34,9 +33,9 @@ public class SiteMinderLogoutFilter extends Plugin {
 		@Autowired
 		public void setSpringExtensionFactory(IConfig config) {
 			this.cookiesString = config.getControllerProperties().getProperty(
-				"ngrinder.sso.domain", "").split(",");
+				"plugin.siteminder.cookie.logout", "").split(",");
 			this.cookiesDomain = config.getControllerProperties().getProperty(
-				"ngrinder.sso.cookiename", "").split(",");
+				"plugin.siteminder.cookie.domain", "").split(",");
 		}
 
 		@Override

@@ -8,15 +8,12 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import net.grinder.common.GrinderProperties;
 import net.grinder.statistics.ImmutableStatisticsSet;
 
-import org.apache.commons.collections.map.StaticBucketMap;
 import org.apache.commons.io.IOUtils;
 import org.ngrinder.common.util.Preconditions;
-import org.ngrinder.common.util.PropertiesWrapper;
 import org.ngrinder.extension.OnTestSamplingRunnable;
 import org.ngrinder.model.PerfTest;
 
@@ -24,13 +21,13 @@ import org.ngrinder.service.IConfig;
 import org.ngrinder.service.IPerfTestService;
 import org.ngrinder.service.IScheduledTaskService;
 import org.ngrinder.service.ISingleConsole;
+import org.pf4j.Extension;
+import org.pf4j.Plugin;
+import org.pf4j.PluginWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ro.fortsoft.pf4j.Extension;
-import ro.fortsoft.pf4j.Plugin;
-import ro.fortsoft.pf4j.PluginWrapper;
 
 /**
  * OnTestSamplingRunnable implements class

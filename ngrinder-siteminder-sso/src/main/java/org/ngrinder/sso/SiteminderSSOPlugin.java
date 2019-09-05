@@ -8,11 +8,10 @@ import org.ngrinder.extension.OnLoginRunnable;
 import org.ngrinder.model.Role;
 import org.ngrinder.model.User;
 import org.ngrinder.sso.SiteMinderFilter.SiteMinderFilterExtension;
+import org.pf4j.Extension;
+import org.pf4j.Plugin;
+import org.pf4j.PluginWrapper;
 import org.springframework.security.authentication.BadCredentialsException;
-
-import ro.fortsoft.pf4j.Extension;
-import ro.fortsoft.pf4j.Plugin;
-import ro.fortsoft.pf4j.PluginWrapper;
 
 public class SiteminderSSOPlugin extends Plugin {
 
