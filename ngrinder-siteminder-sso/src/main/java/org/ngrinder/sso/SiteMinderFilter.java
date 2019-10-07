@@ -60,7 +60,7 @@ public class SiteMinderFilter extends Plugin {
 			userIdHeader = systemProperties.getProperty("plugin.siteminder.header.id", "id");
 			userNameHeader = systemProperties.getProperty("plugin.siteminder.header.name", "name");
 			userEmailHeader = systemProperties.getProperty("plugin.siteminder.header.mail", "mail");
-			userCellPhoneHeader = systemProperties.getProperty("plugin.siteminder.header.cellphone", "mail");
+			userCellPhoneHeader = systemProperties.getProperty("plugin.siteminder.header.cellphone", "cellphone");
 			userLocaleHeader = systemProperties.getProperty("plugin.siteminder.header.locale", "locale");
 			userTimezoneHeader = systemProperties.getProperty("plugin.siteminder.header.timezone", "timezone");
 			defaultLocale = systemProperties.getProperty("plugin.siteminder.header.default.locale", "en");
