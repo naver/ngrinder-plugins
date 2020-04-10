@@ -51,18 +51,26 @@ public class NetworkOverFlow extends Plugin {
 
 		public void startSampling(ISingleConsole singleConsole, PerfTest perfTest,
 			IPerfTestService perfTestService) {
+			LOGGER.info("Test Id: {}", perfTest.getId());
+			LOGGER.info("Test Name: {}, Test Time: {}", perfTest.getTestName(), perfTest.getCreatedDate());
 			List<AgentIdentity> allAttachedAgents = singleConsole.getAllAttachedAgents();
 			int consolePort = singleConsole.getConsolePort();
+			LOGGER.info("getLocalAgent count: {}, consolePort: {}", getLocalAgents().size(), consolePort);
 			int userSpecificAgentCount = 0;
 			for (AgentInfo each : getLocalAgents()) {
+				LOGGER.info("Agent name: {}", each.getName());
+				LOGGER.info("Agent region: {}, Agent port: {}", each.getRegion(), each.getPort());
 				if (each.getPort() == consolePort
 					&& StringUtils.contains(each.getRegion(), "owned")) {
+					LOGGER.info("userSpecific agent name: {}, userSpecific agent region: {}", each.getName(), each.getRegion());
 					userSpecificAgentCount++;
 				}
 			}
 			long configuredLimit = getLimit();
 			int totalAgentSize = allAttachedAgents.size();
 			int sharedAgent = (totalAgentSize - userSpecificAgentCount);
+			LOGGER.info("Plugin Info: totalAgentSize: {}, userSpecificAgentCount: {}", totalAgentSize, userSpecificAgentCount);
+			LOGGER.info("Plugin Info: configuredLimit: {}, sharedAgent: {}", configuredLimit, sharedAgent);
 			limit = sharedAgent == 0 ? Long.MAX_VALUE
 				: (long) (configuredLimit / (((float) sharedAgent) / totalAgentSize));
 
