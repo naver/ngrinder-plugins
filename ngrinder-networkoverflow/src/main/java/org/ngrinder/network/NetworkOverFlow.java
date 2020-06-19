@@ -1,7 +1,5 @@
 package org.ngrinder.network;
 
-import java.util.List;
-
 import net.grinder.common.processidentity.AgentIdentity;
 import net.grinder.statistics.ImmutableStatisticsSet;
 import net.grinder.statistics.StatisticsIndexMap;
@@ -24,6 +22,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+
 /**
  * Network overflow plugin.
  * This plugin blocks test running which causes the network overflow by the large test.
@@ -43,6 +46,10 @@ public class NetworkOverFlow extends Plugin {
 		private static final String PROP_NETWORK_OVERFLOW_PERTEST_LIMIT = "plugin.networkoverflow.pertest.limit";
 		private static final int PROP_NETWORK_OVERFLOW_PERTEST_LIMIT_DEFAULT = 128;
 
+		private static final int RETRY_DELAY = 300;
+		private static final int RETRY_LIMIT = 3;
+		private int retryCount = 0;
+
 		@Autowired
 		private IConfig config;
 
@@ -51,21 +58,54 @@ public class NetworkOverFlow extends Plugin {
 
 		public void startSampling(ISingleConsole singleConsole, PerfTest perfTest,
 			IPerfTestService perfTestService) {
-			List<AgentIdentity> allAttachedAgents = singleConsole.getAllAttachedAgents();
+			LOGGER.info("Test Id: {}", perfTest.getId());
+			LOGGER.info("Test Name: {}, Test Time: {}", perfTest.getTestName(), perfTest.getCreatedDate());
+
+			int totalAgentSize = singleConsole.getAllAttachedAgents().size();
 			int consolePort = singleConsole.getConsolePort();
+			LOGGER.info("getLocalAgent count: {}, consolePort: {}", getLocalAgents().size(), consolePort);
+
+			limit = calculateLimit(totalAgentSize, consolePort);
+		}
+
+		private long calculateLimit(int totalAgentSize, int consolePort) {
+			int agentCount = 0;
 			int userSpecificAgentCount = 0;
 			for (AgentInfo each : getLocalAgents()) {
-				if (each.getPort() == consolePort
-					&& StringUtils.contains(each.getRegion(), "owned")) {
-					userSpecificAgentCount++;
+				LOGGER.info("Agent name: {}", each.getName());
+				LOGGER.info("Agent region: {}, Agent port: {}", each.getRegion(), each.getPort());
+
+				if (each.getPort() == consolePort) {
+					agentCount++;
+					if (StringUtils.contains(each.getRegion(), "owned")) {
+						LOGGER.info("userSpecific agent name: {}, userSpecific agent region: {}", each.getName(), each.getRegion());
+						userSpecificAgentCount++;
+					}
 				}
 			}
-			long configuredLimit = getLimit();
-			int totalAgentSize = allAttachedAgents.size();
-			int sharedAgent = (totalAgentSize - userSpecificAgentCount);
-			limit = sharedAgent == 0 ? Long.MAX_VALUE
-				: (long) (configuredLimit / (((float) sharedAgent) / totalAgentSize));
 
+			if (agentCount == totalAgentSize || ++retryCount > RETRY_LIMIT) {
+				long configuredLimit = getLimit();
+				int sharedAgent = totalAgentSize - userSpecificAgentCount;
+				LOGGER.info("Plugin Info: totalAgentSize: {}, userSpecificAgentCount: {}", totalAgentSize, userSpecificAgentCount);
+				LOGGER.info("Plugin Info: configuredLimit: {}, sharedAgent: {}", configuredLimit, sharedAgent);
+
+				return sharedAgent == 0 ? Long.MAX_VALUE : (long) (configuredLimit / (((float) sharedAgent) / totalAgentSize));
+			} else {
+				LOGGER.info("Agents are not fully ready to start. Only {}/{} of agents are ready", agentCount, totalAgentSize);
+				LOGGER.info("Retry to calculate network limit. Retry count : {}", retryCount);
+				sleep(RETRY_DELAY);
+
+				return calculateLimit(totalAgentSize, consolePort);
+			}
+		}
+
+		void sleep(int millis) {
+			try {
+				MILLISECONDS.sleep(millis);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 		}
 
 		int getLimit() {
@@ -82,7 +122,7 @@ public class NetworkOverFlow extends Plugin {
 			ImmutableStatisticsSet cumulativeStatistics) {
 			LongIndex longIndex = singleConsole.getStatisticsIndexMap().getLongIndex(
 				StatisticsIndexMap.HTTP_PLUGIN_RESPONSE_LENGTH_KEY);
-			Long byteSize = intervalStatistics.getValue(longIndex);
+			long byteSize = intervalStatistics.getValue(longIndex);
 			if (byteSize > this.limit) {
 				if (perfTest.getStatus() != Status.ABNORMAL_TESTING) {
 					String message = String.format(
