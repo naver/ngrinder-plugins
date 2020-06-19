@@ -18,6 +18,9 @@ import org.apache.commons.lang.StringUtils;
 import org.ngrinder.common.util.PropertiesWrapper;
 import org.ngrinder.extension.OnPreAuthServletFilter;
 import org.ngrinder.service.IConfig;
+import org.pf4j.Extension;
+import org.pf4j.Plugin;
+import org.pf4j.PluginWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +28,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-
-import ro.fortsoft.pf4j.Extension;
-import ro.fortsoft.pf4j.Plugin;
-import ro.fortsoft.pf4j.PluginWrapper;
 
 public class SiteMinderFilter extends Plugin {
 
@@ -58,18 +57,14 @@ public class SiteMinderFilter extends Plugin {
 		@Autowired
 		public void setSiteMinderFilterExtension(IConfig config) {
 			PropertiesWrapper systemProperties = config.getSystemProperties();
-			userIdHeader = systemProperties.getProperty("ngrinder.sso.header.id", "id");
-			userNameHeader = systemProperties.getProperty("ngrinder.sso.header.name", "name");
-			userEmailHeader = systemProperties.getProperty("ngrinder.sso.header.mail", "mail");
-			userCellPhoneHeader = systemProperties.getProperty("ngrinder.sso.header.cellphone",
-				"mail");
-			userLocaleHeader = systemProperties.getProperty("ngrinder.sso.header.locale", "locale");
-			userTimezoneHeader = systemProperties.getProperty("ngrinder.sso.header.timezone",
-				"timezone");
-			defaultLocale = systemProperties.getProperty("ngrinder.sso.default.locale", "en");
-			defaultTimezone = systemProperties.getProperty("ngrinder.sso.default.timezone",
-				"Asia/Seoul");
-
+			userIdHeader = systemProperties.getProperty("plugin.siteminder.header.id", "id");
+			userNameHeader = systemProperties.getProperty("plugin.siteminder.header.name", "name");
+			userEmailHeader = systemProperties.getProperty("plugin.siteminder.header.mail", "mail");
+			userCellPhoneHeader = systemProperties.getProperty("plugin.siteminder.header.cellphone", "cellphone");
+			userLocaleHeader = systemProperties.getProperty("plugin.siteminder.header.locale", "locale");
+			userTimezoneHeader = systemProperties.getProperty("plugin.siteminder.header.timezone", "timezone");
+			defaultLocale = systemProperties.getProperty("plugin.siteminder.header.default.locale", "en");
+			defaultTimezone = systemProperties.getProperty("plugin.siteminder.header.default.timezone", "Asia/Seoul");
 		}
 
 		@Override
