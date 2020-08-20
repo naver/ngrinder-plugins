@@ -17,7 +17,6 @@ Check with wiki documentation.
 plugin.siteminder.header.id=id_field_name_in_header_siteminder_provide
 plugin.siteminder.header.name=name_field_name_in_header_siteminder_provide
 plugin.siteminder.header.mail=email_field_name_in_header_siteminder_provide
-plugin.siteminder.header.cellphone=cellphone_field_name_in_header_siteminder_provide
 plugin.siteminder.header.locale=locale_field_name_in_header_siteminder_provide
 plugin.siteminder.header.timezone=timezone_field_name_in_header_siteminder_provide
 plugin.siteminder.default.locale=default_locale_if_no_locale_is_provided
@@ -30,5 +29,5 @@ This completly depends on the your siteminder configuration, please ask to your 
 
 ## How to configure apache.
 * Please ask your siteminder administrator to setup the apache.
-  * You should ask him the provide the id, name, email, cellphone, timezone, locale in the headers to the backend WAS.
+  * You should ask him the provide the id, name, email, timezone, locale in the headers to the backend WAS.
 * Add the local login page.
