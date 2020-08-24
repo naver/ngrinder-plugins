@@ -31,7 +31,6 @@ public class SiteminderSSOPlugin extends Plugin {
 				user.setUserId(userId);
 				user.setUserName(getString(map, "name", ""));
 				user.setEmail(getString(map, "email", ""));
-				user.setMobilePhone(getString(map, "cellphone", ""));
 				user.setAuthProviderClass(SiteminderSSOPluginExtension.this.getClass().getName());
 				user.setEnabled(true);
 				user.setExternal(true);

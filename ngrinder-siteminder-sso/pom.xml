@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ngrinder</groupId>
 	<artifactId>siteminder-sso</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<name>siteminder-sso</name>
 	<description>ngrinder-siteminder-sso Plugin Framework for Java</description>
 	
@@ -58,7 +58,7 @@
 		<repository>
 			<id>maven-repo</id>
 			<name>Official Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>ngrinder.maven.repo</id>
