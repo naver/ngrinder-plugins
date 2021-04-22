@@ -59,7 +59,7 @@ public class NetworkOverFlow extends Plugin {
 		public void startSampling(ISingleConsole singleConsole, PerfTest perfTest,
 			IPerfTestService perfTestService) {
 			LOGGER.info("Test Id: {}", perfTest.getId());
-			LOGGER.info("Test Name: {}, Test Time: {}", perfTest.getTestName(), perfTest.getCreatedDate());
+			LOGGER.info("Test Name: {}, Test Time: {}", perfTest.getTestName(), perfTest.getCreatedAt());
 
 			int totalAgentSize = singleConsole.getAllAttachedAgents().size();
 			int consolePort = singleConsole.getConsolePort();
@@ -77,7 +77,7 @@ public class NetworkOverFlow extends Plugin {
 
 				if (each.getPort() == consolePort) {
 					agentCount++;
-					if (StringUtils.contains(each.getRegion(), "owned")) {
+					if (StringUtils.isNotEmpty(each.getOwner())) {
 						LOGGER.info("userSpecific agent name: {}, userSpecific agent region: {}", each.getName(), each.getRegion());
 						userSpecificAgentCount++;
 					}
