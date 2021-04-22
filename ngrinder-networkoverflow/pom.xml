@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ngrinder</groupId>
 	<artifactId>ngrinder-networkoverflow</artifactId>
-	<version>3.3.2</version>
+	<version>3.3.3</version>
 	<name>ngrinder-networkoverflow</name>
 	<description>ngrinder-networkoverflow Plugin Framework for Java</description>
 	
@@ -23,7 +23,7 @@
 		<ngrinder.core.version>3.5.5</ngrinder.core.version>
         <plugin.id>ngrinder-networkoverflow</plugin.id>
         <plugin.class>org.ngrinder.network.PhysicalNetworkOverFlow</plugin.class>
-        <plugin.version>3.3.2</plugin.version>
+        <plugin.version>3.3.3</plugin.version>
         <plugin.provider>NAVER</plugin.provider>
         <plugin.dependencies />
     </properties>
