@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ngrinder</groupId>
 	<artifactId>ngrinder-networkoverflow</artifactId>
-	<version>3.3.1-SNAPSHOT</version>
+	<version>3.3.3</version>
 	<name>ngrinder-networkoverflow</name>
 	<description>ngrinder-networkoverflow Plugin Framework for Java</description>
 	
@@ -16,12 +16,14 @@
     </licenses>
     
     <properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
-		<ngrinder.core.version>3.3</ngrinder.core.version>
+		<ngrinder.core.version>3.5.5</ngrinder.core.version>
         <plugin.id>ngrinder-networkoverflow</plugin.id>
         <plugin.class>org.ngrinder.network.PhysicalNetworkOverFlow</plugin.class>
-        <plugin.version>4.0.0</plugin.version>
+        <plugin.version>3.3.3</plugin.version>
         <plugin.provider>NAVER</plugin.provider>
         <plugin.dependencies />
     </properties>
@@ -69,11 +71,7 @@
 		<repository>
 			<id>maven-repo</id>
 			<name>Official Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-		</repository>
-		<repository>
-			<id>nhnopensource.maven.repo</id>
-			<url>https://github.com/nhnopensource/nhnopensource.maven.repo/raw/master/releases</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</repository>
 	</repositories>
 
@@ -115,9 +113,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>ro.fortsoft.pf4j</groupId>
+			<groupId>org.pf4j</groupId>
 			<artifactId>pf4j</artifactId>
-			<version>0.12.0</version>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

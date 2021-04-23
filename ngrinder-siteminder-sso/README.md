@@ -14,21 +14,20 @@ Check with wiki documentation.
 * Provide following configurations.
 
 ```
-ngrinder.sso.header.id=id_field_name_in_header_siteminder_provide
-ngrinder.sso.header.name=name_field_name_in_header_siteminder_provide
-ngrinder.sso.header.email=email_field_name_in_header_siteminder_provide
-ngrinder.sso.header.cellphone=cellphone_field_name_in_header_siteminder_provide
-ngrinder.sso.header.locale=locale_field_name_in_header_siteminder_provide
-ngrinder.sso.header.timezone=timezone_field_name_in_header_siteminder_provide
-ngrinder.sso.default.locale=default_locale_if_no_locale_is_provided
-ngrinder.sso.default.timezone=default_timezone_if_no_timezone_is_provided
-ngrinder.sso.domain=the_domain_name_of_ngrinder
-ngrinder.sso.cookiename=the_cookiename_name_of_ngrinder
+plugin.siteminder.header.id=id_field_name_in_header_siteminder_provide
+plugin.siteminder.header.name=name_field_name_in_header_siteminder_provide
+plugin.siteminder.header.mail=email_field_name_in_header_siteminder_provide
+plugin.siteminder.header.locale=locale_field_name_in_header_siteminder_provide
+plugin.siteminder.header.timezone=timezone_field_name_in_header_siteminder_provide
+plugin.siteminder.default.locale=default_locale_if_no_locale_is_provided
+plugin.siteminder.default.timezone=default_timezone_if_no_timezone_is_provided
+plugin.siteminder.cookie.domain=the_domain_name_of_ngrinder
+plugin.siteminder.cookie.logout=the_cookiename_name_of_ngrinder
 ```
 
 This completly depends on the your siteminder configuration, please ask to your siteminder administrator.
 
 ## How to configure apache.
 * Please ask your siteminder administrator to setup the apache.
-  * You should ask him the provide the id, name, email, cellphone, timezone, locale in the headers to the backend WAS.
+  * You should ask him the provide the id, name, email, timezone, locale in the headers to the backend WAS.
 * Add the local login page.
