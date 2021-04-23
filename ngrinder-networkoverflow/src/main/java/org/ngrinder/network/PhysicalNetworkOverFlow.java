@@ -50,11 +50,10 @@ public class PhysicalNetworkOverFlow extends Plugin {
 			if (workingAgents.isEmpty()) {
 				return;
 			}
-			String region = "";
+
 			for (AgentStatus each : workingAgents) {
-				final String eachAgentRegion = ((AgentControllerIdentityImplementation) each.getAgentIdentity()).getRegion();
-				if (!StringUtils.contains(eachAgentRegion, "owned_")) {
-					region = eachAgentRegion;
+				final String owner = ((AgentControllerIdentityImplementation) each.getAgentIdentity()).getOwner();
+				if (StringUtils.isEmpty(owner)) {
 					totalReceived += each.getSystemDataModel().getReceivedPerSec();
 					totalSent += each.getSystemDataModel().getSentPerSec();
 				}
@@ -63,15 +62,14 @@ public class PhysicalNetworkOverFlow extends Plugin {
 			int limit = config.getControllerProperties().getPropertyInt(
 				PROP_NETWORK_OVERFLOW_LIMIT, PROP_NETWORK_OVERFLOW_LIMIT_DEFAULT) * 1024 * 1024;
 			if (totalReceived > limit || totalSent > limit) {
-				LOGGER.debug("LIMIT : {}, RX : {}, TX : {}", new Object[]{limit, totalReceived,
-					totalSent});
+				LOGGER.debug("LIMIT : {}, RX : {}, TX : {}", new Object[]{limit, totalReceived, totalSent});
 				for (PerfTest perfTest : perfTestService.getAllTesting()) {
 					if (perfTest.getStatus() != Status.ABNORMAL_TESTING) {
 						perfTestService.markStatusAndProgress(
 							perfTest,
 							Status.ABNORMAL_TESTING,
-							String.format("Too much traffic on the region %s. Stop by force.\n"
-								+ "- LIMIT/s: %s\n" + "- RX/s: %s / TX/s: %s", region,
+							String.format("Too much traffic on current region. Stop by force.\n"
+								+ "- LIMIT/s: %s\n" + "- RX/s: %s / TX/s: %s",
 								UnitUtils.byteCountToDisplaySize(limit),
 								UnitUtils.byteCountToDisplaySize(totalReceived),
 								UnitUtils.byteCountToDisplaySize(totalSent)));
